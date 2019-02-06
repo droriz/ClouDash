@@ -1,42 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@drawable/splash_bg"
     >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@null"
-            android:hint="Access key ID"
-            android:padding="5dp"
-            android:singleLine="true" />
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@null"
-            android:hint="Secret access key"
-            android:padding="5dp"
-            android:singleLine="true" />
         <ImageButton
-            android:id="@+id/save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
+            android:id="@+id/amazon"
+            android:layout_width="226dp"
+            android:layout_height="162dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="40dp"
             android:background="@null"
             android:cropToPadding="false"
-            android:src="@drawable/save_account" />
-    </LinearLayout>
+            android:scaleType="fitXY"
+            android:src="@drawable/awscloud" />
 
-</LinearLayout>
+        <ImageButton
+            android:id="@+id/azure"
+            android:layout_width="355dp"
+            android:layout_height="186dp"
+            android:layout_below="@id/amazon"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="16dp"
+            android:background="@null"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            android:src="@drawable/azurecloud" />
+
+        <ImageButton
+            android:id="@+id/google"
+            android:layout_width="360dp"
+            android:layout_height="197dp"
+            android:layout_below="@id/azure"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:background="@null"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            android:src="@drawable/googlecloud" />
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:background="@null"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            android:layout_gravity="bottom"
+            android:src="@drawable/backbutton" />
+    </RelativeLayout>
+
+</RelativeLayout>
