@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                         if(data.isContainProvider("AWS")) {
                             awsButton.setVisibility(View.VISIBLE);
                             awsButton.setText(data.getBalanceInformation("AWS"));
+                            
 
                         }
                         if(data.isContainProvider("AZURE")) {
