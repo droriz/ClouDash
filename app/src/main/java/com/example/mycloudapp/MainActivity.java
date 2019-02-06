@@ -1,9 +1,12 @@
 package com.example.mycloudapp;
 
 import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -35,9 +38,11 @@ import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
 
 public class MainActivity extends AppCompatActivity {
     private RequestQueue mRequestQueue;
+    Context ctx=this;
     Button awsButton;
     Button azureButton;
     Button googleButton;
+    String getData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,19 +62,39 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Gson gson = new Gson(); // Or use new GsonBuilder().create();
                         Data data = gson.fromJson(response.toString(), Data.class);
+                        getData = response.toString();
                         if(data.isContainProvider("AWS")) {
                             awsButton.setVisibility(View.VISIBLE);
                             awsButton.setText(data.getBalanceInformation("AWS"));
-                            
+                            awsButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    goToInfo("AWS");
+                                };
+                            });
 
                         }
                         if(data.isContainProvider("AZURE")) {
                             azureButton.setVisibility(View.VISIBLE);
                             azureButton.setText(data.getBalanceInformation("AZURE"));
+                            azureButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    goToInfo("AZURE");
+                                };
+                            });
+
+
                         }
                         if(data.isContainProvider("GOOGLE")) {
                             googleButton.setVisibility(View.VISIBLE);
                             googleButton.setText(data.getBalanceInformation("GOOGLE"));
+                            googleButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    goToInfo("GOOGLE");
+                                };
+                            });
                         }
                         makeToast(data.totalUsage);
                     }
@@ -88,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
             };
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,5 +139,13 @@ public class MainActivity extends AppCompatActivity {
     public void makeToast(String str){
         Toast.makeText(this,str, Toast.LENGTH_LONG).show();
     }
-
+    public void goToInfo(String provider) {
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("MyPref", 0);
+        SharedPreferences.Editor edit=sp.edit();
+        edit.putString("ALL_DATA", getData);
+        edit.apply();
+        Intent newIntent = new Intent("android.intent.action.ACCOUNT_INFO");
+        newIntent.putExtra("provider",provider);
+        startActivity(newIntent);
+    }
 }
