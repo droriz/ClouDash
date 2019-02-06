@@ -1,21 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@drawable/splash_bg"
+
     >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:background="@drawable/splash_bg"
         android:orientation="vertical">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:background="#00ffffff"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/aws_acounnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="aws" />
+
+            <Button
+                android:id="@+id/azure_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Google" />
+
+            <Button
+                android:id="@+id/google_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="azure" />
+        </LinearLayout>
+
         <ImageButton
             android:id="@+id/add_account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="160dp"
+            android:layout_height="120dp"
             android:layout_gravity="center"
-            android:layout_marginTop="25dp"
+            android:layout_marginLeft="150dp"
+
             android:background="@null"
             android:cropToPadding="false"
+            android:scaleType="fitCenter"
             android:src="@drawable/add_cloud_account" />
     </LinearLayout>
 
