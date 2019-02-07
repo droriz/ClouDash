@@ -24,4 +24,12 @@ public class Data {
         }
         return "";
     }
+    public CloudProviderData getProviderDataByType(String type) {
+        for(int i = 0;i<cloudUsageList.length;i++){
+            if(cloudUsageList[i].accountType != null && cloudUsageList[i].accountType.toUpperCase().equals(type.toUpperCase())){
+                return cloudUsageList[i];
+            }
+        }
+        return null;
+    }
 }

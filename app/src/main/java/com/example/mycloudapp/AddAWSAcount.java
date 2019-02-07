@@ -31,8 +31,8 @@ public class AddAWSAcount extends Activity {
         setContentView(R.layout.add_aws_account);
         queue = Volley.newRequestQueue(this);
         ImageButton saveAccout=(ImageButton)findViewById(R.id.save);
-        key   = (EditText)findViewById(R.id.username);
-        password   = (EditText)findViewById(R.id.password);
+        key   = (EditText)findViewById(R.id.username_input);
+        password   = (EditText)findViewById(R.id.password_input);
 
         saveAccout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +70,7 @@ public class AddAWSAcount extends Activity {
 //                };
 //                queue.add(postRequest);
                startActivity(new Intent("android.intent.action.MAIN"));
+               finish();
             };
         });
 
@@ -77,13 +78,12 @@ public class AddAWSAcount extends Activity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent("android.intent.action.ADD_ACCOUNT"));
+//                startActivity(new Intent("android.intent.action.ADD_ACCOUNT"));
+                finish();
             };
         });
 
     }
-
-
     public void makeToast(String str){
         Toast.makeText(this,str, Toast.LENGTH_LONG).show();
     }

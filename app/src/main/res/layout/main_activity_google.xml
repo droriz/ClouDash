@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/splash_bg"
+        android:orientation="vertical">
+
+        <lecho.lib.hellocharts.view.PieChartView
+            android:id="@+id/regionchart"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="40dp"/>
+            <!--android:visibility="invisible"/>-->
+
+        <lecho.lib.hellocharts.view.PieChartView
+            android:id="@+id/servicechart"
+            android:layout_width="match_parent"
+            android:layout_below="@id/regionchart"
+            android:layout_height="320dp"
+            android:layout_marginTop="40dp"/>
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:background="@null"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            android:src="@drawable/backbutton"
+            android:layout_alignParentBottom="true"/>
+
+        </RelativeLayout>
+
+</RelativeLayout>

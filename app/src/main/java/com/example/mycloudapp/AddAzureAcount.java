@@ -18,9 +18,9 @@ public class AddAzureAcount extends Activity {
         setContentView(R.layout.add_azure_account);
 
         ImageButton saveAccout=(ImageButton)findViewById(R.id.save);
-        clientId   = (EditText)findViewById(R.id.clientId);
-        tenant   = (EditText)findViewById(R.id.tenant);
-        subscription   = (EditText)findViewById(R.id.subscription);
+        clientId   = (EditText)findViewById(R.id.clientid_input);
+        tenant   = (EditText)findViewById(R.id.tenant_input);
+        subscription   = (EditText)findViewById(R.id.subscription_input);
 
         saveAccout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +30,7 @@ public class AddAzureAcount extends Activity {
                 String mySubscription = subscription.getText().toString();
                 // TODO after post sucsses do:
                startActivity(new Intent("android.intent.action.MAIN"));
+               finish();
             };
         });
 
@@ -37,7 +38,8 @@ public class AddAzureAcount extends Activity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent("android.intent.action.ADD_ACCOUNT"));
+//                startActivity(new Intent("android.intent.action.ADD_ACCOUNT"));
+                finish();
             };
         });
 
