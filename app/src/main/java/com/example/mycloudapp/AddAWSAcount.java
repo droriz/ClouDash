@@ -17,8 +17,8 @@ public class AddAWSAcount extends Activity {
         setContentView(R.layout.add_aws_account);
 
         ImageButton saveAccout=(ImageButton)findViewById(R.id.save);
-        key   = (EditText)findViewById(R.id.username);
-        password   = (EditText)findViewById(R.id.password);
+        key   = (EditText)findViewById(R.id.username_input);
+        password   = (EditText)findViewById(R.id.password_input);
 
         saveAccout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,7 +27,7 @@ public class AddAWSAcount extends Activity {
                 String myPassword = password.getText().toString();
                 // TODO after post sucsses do:
                 startActivity(new Intent("android.intent.action.MAIN"));
-                finish();
+//                finish();
             };
         });
 

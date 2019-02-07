@@ -93,7 +93,6 @@ public class MainAWSActivity extends Activity {
         });
 
 
-
         ImageButton backButton =(ImageButton)findViewById(R.id.back);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +100,6 @@ public class MainAWSActivity extends Activity {
                 finish();
             };
         });
-
     }
 
     public void makeToast(String str){

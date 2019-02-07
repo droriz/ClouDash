@@ -85,12 +85,10 @@ public class MainActivity extends AppCompatActivity {
 
         ImageButton addAccout=(ImageButton)findViewById(R.id.add_account);
 
-//        fetchData();
+//       fetchData();
         String temp ="{\"totalUsage\":2000,\"cloudUsageList\":[{\"accountType\":\"aws\",\"accountsBalance\":1000,\"regions\":[{\"name\":\"Irland\",\"balance\":600.0,\"capacitySize\":10.0,\"capacityBalance\":200.0,\"networkBalance\":100.0,\"computeBalance\":300.0},{\"name\":\"Israel\",\"balance\":400.0,\"capacitySize\":5.0,\"capacityBalance\":100.0,\"networkBalance\":100.0,\"computeBalance\":50.0}]}," +
                 "{\"accountType\":\"azure\",\"accountsBalance\":600,\"regions\":[{\"name\":\"Irland\",\"balance\":300.0,\"capacitySize\":10.0,\"capacityBalance\":200.0,\"networkBalance\":100.0,\"computeBalance\":200.0},{\"name\":\"Israel\",\"balance\":150.0,\"capacitySize\":5.0,\"capacityBalance\":100.0,\"networkBalance\":100.0,\"computeBalance\":50.0}]}," +
                 "{\"accountType\":\"google\",\"accountsBalance\":400,\"regions\":[{\"name\":\"Irland\",\"balance\":100.0,\"capacitySize\":10.0,\"capacityBalance\":140.0,\"networkBalance\":100.0,\"computeBalance\":200.0},{\"name\":\"Israel\",\"balance\":150.0,\"capacitySize\":5.0,\"capacityBalance\":200.0,\"networkBalance\":100.0,\"computeBalance\":50.0}]}]}";
-
-//        String temp = "";
         buildMainDash(temp);
 
         addAccout.setOnClickListener(new View.OnClickListener() {

@@ -17,8 +17,8 @@ public class AddGoogleAcount extends Activity {
         setContentView(R.layout.add_google_account);
 
         ImageButton saveAccout=(ImageButton)findViewById(R.id.save);
-        key   = (EditText)findViewById(R.id.username);
-        password   = (EditText)findViewById(R.id.password);
+        key   = (EditText)findViewById(R.id.clientid_input);
+        password   = (EditText)findViewById(R.id.password_input);
 
         saveAccout.setOnClickListener(new View.OnClickListener() {
             @Override

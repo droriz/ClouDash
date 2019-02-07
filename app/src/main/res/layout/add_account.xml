@@ -12,11 +12,11 @@
 
         <ImageButton
             android:id="@+id/amazon"
-            android:layout_width="226dp"
-            android:layout_height="162dp"
-            android:layout_centerInParent="true"
+            android:layout_width="189dp"
+            android:layout_height="132dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="40dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="80dp"
             android:background="@null"
             android:cropToPadding="false"
             android:scaleType="fitXY"
@@ -24,11 +24,11 @@
 
         <ImageButton
             android:id="@+id/azure"
-            android:layout_width="355dp"
-            android:layout_height="186dp"
+            android:layout_width="297dp"
+            android:layout_height="156dp"
             android:layout_below="@id/amazon"
             android:layout_centerInParent="true"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:background="@null"
             android:cropToPadding="false"
             android:scaleType="fitCenter"
@@ -36,12 +36,12 @@
 
         <ImageButton
             android:id="@+id/google"
-            android:layout_width="360dp"
-            android:layout_height="197dp"
+            android:layout_width="326dp"
+            android:layout_height="162dp"
             android:layout_below="@id/azure"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:background="@null"
             android:cropToPadding="false"
             android:scaleType="fitCenter"
