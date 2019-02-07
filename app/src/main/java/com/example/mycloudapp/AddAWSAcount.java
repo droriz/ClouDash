@@ -26,7 +26,8 @@ public class AddAWSAcount extends Activity {
                 String myKey = key.getText().toString();
                 String myPassword = password.getText().toString();
                 // TODO after post sucsses do:
-               startActivity(new Intent("android.intent.action.MAIN"));
+                startActivity(new Intent("android.intent.action.MAIN"));
+                finish();
             };
         });
 
@@ -34,7 +35,8 @@ public class AddAWSAcount extends Activity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent("android.intent.action.ADD_ACCOUNT"));
+//                startActivity(new Intent("android.intent.action.ADD_ACCOUNT"));
+                finish();
             };
         });
 

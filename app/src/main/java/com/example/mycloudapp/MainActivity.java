@@ -4,6 +4,7 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -15,7 +16,11 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,82 +38,64 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SliceValue;
+import lecho.lib.hellocharts.view.PieChartView;
 
 import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
 
 public class MainActivity extends AppCompatActivity {
     private RequestQueue mRequestQueue;
     Context ctx=this;
-    Button awsButton;
-    Button azureButton;
-    Button googleButton;
     String getData;
+    PieChartView pieChartView;
+    List<SliceValue> pieData;
+    TextView awsBalance;
+    TextView azureBalance;
+    TextView googleBalance;
+    TextView totalBalance;
+    TextView dailyBalance;
+
+    LinearLayout summary;
+    RelativeLayout awsSummary;
+    RelativeLayout azureSummary;
+    RelativeLayout googleSummary;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        awsButton = (Button) findViewById(R.id.aws_acounnt);
-        azureButton = (Button) findViewById(R.id.azure_account);
-        googleButton = (Button) findViewById(R.id.google_account);
-        awsButton.setVisibility(View.GONE);
-        azureButton.setVisibility(View.GONE);
-        googleButton.setVisibility(View.GONE);
+        awsBalance = (TextView) this.findViewById(R.id.awsbalance);
+        azureBalance = (TextView) this.findViewById(R.id.azurebalance);
+        googleBalance = (TextView) this.findViewById(R.id.googlebalance);
+        totalBalance = (TextView) this.findViewById(R.id.totalbalancenum);
+        dailyBalance = (TextView) this.findViewById(R.id.dailybalancenum);
+
+        summary = (LinearLayout)  this.findViewById(R.id.summary);
+        awsSummary = (RelativeLayout)  this.findViewById(R.id.awssummary);
+        azureSummary = (RelativeLayout)  this.findViewById(R.id.azuresummary);
+        googleSummary = (RelativeLayout)  this.findViewById(R.id.googlesummary);
+
+        pieChartView = findViewById(R.id.chart);
+        pieData = new ArrayList<>();
+
         ImageButton addAccout=(ImageButton)findViewById(R.id.add_account);
-        String url = "http://ec2-54-229-237-186.eu-west-1.compute.amazonaws.com:8080/data";
-        mRequestQueue = Volley.newRequestQueue(this);
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Gson gson = new Gson(); // Or use new GsonBuilder().create();
-                        Data data = gson.fromJson(response.toString(), Data.class);
-                        getData = response.toString();
-                        if(data.isContainProvider("AWS")) {
-                            awsButton.setVisibility(View.VISIBLE);
-                            awsButton.setText(data.getBalanceInformation("AWS"));
-                            awsButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    goToInfo("AWS");
-                                };
-                            });
 
-                        }
-                        if(data.isContainProvider("AZURE")) {
-                            azureButton.setVisibility(View.VISIBLE);
-                            azureButton.setText(data.getBalanceInformation("AZURE"));
-                            azureButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    goToInfo("AZURE");
-                                };
-                            });
+//        fetchData();
+        String temp ="{\"totalUsage\":2000,\"cloudUsageList\":[{\"accountType\":\"aws\",\"accountsBalance\":1000,\"regions\":[{\"name\":\"Irland\",\"balance\":600.0,\"capacitySize\":10.0,\"capacityBalance\":200.0,\"networkBalance\":100.0,\"computeBalance\":300.0},{\"name\":\"Israel\",\"balance\":400.0,\"capacitySize\":5.0,\"capacityBalance\":100.0,\"networkBalance\":100.0,\"computeBalance\":50.0}]}," +
+                "{\"accountType\":\"azure\",\"accountsBalance\":600,\"regions\":[{\"name\":\"Irland\",\"balance\":300.0,\"capacitySize\":10.0,\"capacityBalance\":200.0,\"networkBalance\":100.0,\"computeBalance\":200.0},{\"name\":\"Israel\",\"balance\":150.0,\"capacitySize\":5.0,\"capacityBalance\":100.0,\"networkBalance\":100.0,\"computeBalance\":50.0}]}," +
+                "{\"accountType\":\"google\",\"accountsBalance\":400,\"regions\":[{\"name\":\"Irland\",\"balance\":100.0,\"capacitySize\":10.0,\"capacityBalance\":140.0,\"networkBalance\":100.0,\"computeBalance\":200.0},{\"name\":\"Israel\",\"balance\":150.0,\"capacitySize\":5.0,\"capacityBalance\":200.0,\"networkBalance\":100.0,\"computeBalance\":50.0}]}]}";
 
+//        String temp = "";
+        buildMainDash(temp);
 
-                        }
-                        if(data.isContainProvider("GOOGLE")) {
-                            googleButton.setVisibility(View.VISIBLE);
-                            googleButton.setText(data.getBalanceInformation("GOOGLE"));
-                            googleButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    goToInfo("GOOGLE");
-                                };
-                            });
-                        }
-                        makeToast(data.totalUsage);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        mRequestQueue.add(req);
         addAccout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                     startActivity(new Intent("android.intent.action.ADD_ACCOUNT"));
             };
         });
@@ -147,5 +134,98 @@ public class MainActivity extends AppCompatActivity {
         Intent newIntent = new Intent("android.intent.action.ACCOUNT_INFO");
         newIntent.putExtra("provider",provider);
         startActivity(newIntent);
+    }
+
+    public void fetchData() {
+        String url = "http://ec2-54-76-167-137.eu-west-1.compute.amazonaws.com:8080/data";
+        mRequestQueue = Volley.newRequestQueue(this);
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        buildMainDash(response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        mRequestQueue.add(req);
+    }
+
+    public void buildMainDash(String incomeData){
+        if (incomeData.equals("")){
+            return;
+        }
+
+        Gson gson = new Gson(); // Or use new GsonBuilder().create();
+        Data data = gson.fromJson(incomeData, Data.class);
+        getData = incomeData;
+
+        pieChartView.setVisibility(View.VISIBLE);
+        summary.setVisibility(View.VISIBLE);;
+
+        if(data.isContainProvider("AWS")) {
+            final CloudProviderData awsProvideData = data.getProviderDataByType("AWS");
+            pieData.add(new SliceValue(Integer.parseInt(awsProvideData.accountsBalance), Color.rgb(116, 119, 216)));
+            awsBalance.setText(awsProvideData.accountsBalance);
+            awsSummary.setVisibility(View.VISIBLE);
+
+            Button awsMainDash=(Button)findViewById(R.id.aws);
+            awsMainDash.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent("android.intent.action.AWS_MAIN_DASH");
+                        intent.putExtra("aws_data",awsProvideData);
+                        startActivity(intent);
+                        //finish();
+                    };
+                });
+
+        }
+
+        if(data.isContainProvider("AZURE")) {
+            final CloudProviderData azureProvideData = data.getProviderDataByType("AZURE");
+            pieData.add(new SliceValue(Integer.parseInt(azureProvideData.accountsBalance), Color.rgb(27, 200, 137)));
+            azureBalance.setText(azureProvideData.accountsBalance);
+            azureSummary.setVisibility(View.VISIBLE);
+
+            Button azureMainDash=(Button)findViewById(R.id.azure);
+            azureMainDash.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent("android.intent.action.AZURE_MAIN_DASH");
+                    intent.putExtra("azure_data",azureProvideData);
+                    startActivity(intent);
+                    //finish();
+                };
+            });
+        }
+
+        if(data.isContainProvider("GOOGLE")) {
+            final CloudProviderData googleProvideData = data.getProviderDataByType("GOOGLE");
+            pieData.add(new SliceValue(Integer.parseInt(googleProvideData.accountsBalance), Color.rgb( 239, 84, 84)));
+            googleBalance.setText(googleProvideData.accountsBalance);
+            googleSummary.setVisibility(View.VISIBLE);
+
+            Button googleMainDash=(Button)findViewById(R.id.google);
+            googleMainDash.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent("android.intent.action.GOOGLE_MAIN_DASH");
+                    intent.putExtra("google_data",googleProvideData);
+                    startActivity(intent);
+                    //finish();
+                };
+            });
+        }
+
+        PieChartData pieChartData = new PieChartData(pieData);
+        pieChartData.setHasCenterCircle(true).setCenterText1("ClouDash").setCenterText1FontSize(30);
+        pieChartView.setPieChartData(pieChartData);
+
+        totalBalance.setText(data.totalUsage);
+        dailyBalance.setText("500");
     }
 }

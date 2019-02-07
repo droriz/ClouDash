@@ -30,6 +30,7 @@ public class AddAzureAcount extends Activity {
                 String mySubscription = subscription.getText().toString();
                 // TODO after post sucsses do:
                startActivity(new Intent("android.intent.action.MAIN"));
+               finish();
             };
         });
 
@@ -37,7 +38,8 @@ public class AddAzureAcount extends Activity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent("android.intent.action.ADD_ACCOUNT"));
+//                startActivity(new Intent("android.intent.action.ADD_ACCOUNT"));
+                finish();
             };
         });
 

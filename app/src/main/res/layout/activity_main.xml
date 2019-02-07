@@ -8,40 +8,205 @@
         android:background="@drawable/splash_bg"
         android:orientation="vertical">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <lecho.lib.hellocharts.view.PieChartView
+            android:id="@+id/chart"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:background="#00ffffff"
-            android:orientation="vertical">
+            android:layout_height="320dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="40dp"
+            android:visibility="invisible"/>
 
-            <Button
-                android:id="@+id/aws_acounnt"
+
+
+        <LinearLayout
+            android:id="@+id/summary"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@id/chart"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:background="#FFFFFF"
+            android:visibility="invisible">
+
+
+            <RelativeLayout
+                android:id="@+id/summarybalance"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@id/chart"
+                android:background="#FFFFFF"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/totalbalance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="aws" />
+                android:layout_margin="5dp"
+                android:text="Toatal Balance"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="10dp"
+                android:textColor="#B2B3C3"/>
 
-            <Button
-                android:id="@+id/azure_account"
+                <TextView
+                    android:id="@+id/totalbalancenum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:paddingTop="28dp"
+                    android:text="Daily Balance"
+                    android:textStyle="bold"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/summarydaily"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#FFFFFF"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/dailybalance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Google" />
+                android:layout_margin="5dp"
+                android:text="Daily Balance"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="10dp"
+                android:textColor="#B2B3C3"/>
 
-            <Button
-                android:id="@+id/google_account"
+            <TextView
+                android:id="@+id/dailybalancenum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="azure" />
-        </LinearLayout>
+                android:layout_margin="5dp"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="28dp"
+                android:text="Daily Balance"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/awssummary"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/summary"
+            android:background="#FFFFFF"
+            android:layout_marginTop="20dp"
+            android:visibility="invisible">
+
+            <Button
+                android:id="@+id/aws"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="AWS"
+                android:background="#7477D8"
+                android:layout_margin="5dp"
+                 />
+
+            <TextView
+                android:id="@+id/awsbalance"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="50dp"
+                android:paddingTop="15dp"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:text="Daily"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/azuresummary"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/awssummary"
+            android:background="#FFFFFF"
+            android:layout_marginTop="2dp"
+            android:visibility="invisible">
+
+            <Button
+                android:id="@+id/azure"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="AZURE"
+                android:background="#1BC889"
+                android:layout_margin="5dp"
+                />
+
+            <TextView
+                android:id="@+id/azurebalance"
+                android:layout_alignParentRight="true"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:paddingLeft="50dp"
+                android:paddingTop="15dp"
+                android:layout_margin="5dp"
+                android:text="Daily"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/googlesummary"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/azuresummary"
+            android:background="#FFFFFF"
+            android:layout_marginTop="2dp"
+            android:visibility="invisible">
+
+            <Button
+                android:id="@+id/google"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="GOOGLE"
+                android:background="#EF5454"
+                android:layout_margin="5dp"
+                />
+
+            <TextView
+                android:id="@+id/googlebalance"
+                android:layout_alignParentRight="true"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:paddingLeft="50dp"
+                android:paddingTop="15dp"
+                android:text="Daily"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/placeholdersummary"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_below="@id/googlesummary"
+            android:background="#FFFFFF"
+            android:layout_marginTop="2dp"
+            android:visibility="visible">
+        </RelativeLayout>
+
+
+
+
 
         <ImageButton
             android:id="@+id/add_account"
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:background="@null"
             android:cropToPadding="false"
             android:scaleType="fitCenter"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
             android:src="@drawable/add_cloud_account" />
     </RelativeLayout>
 

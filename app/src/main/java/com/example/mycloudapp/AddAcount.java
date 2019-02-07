@@ -22,6 +22,7 @@ public class AddAcount extends Activity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent("android.intent.action.MAIN"));
+                finish();
             };
         });
 
@@ -32,7 +33,6 @@ public class AddAcount extends Activity {
             public void onClick(View v) {
                 startActivity(new Intent("android.intent.action.ADD_AWS_ACCOUNT"));
                 finish();
-
             };
         });
 

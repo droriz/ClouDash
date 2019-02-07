@@ -1,6 +1,8 @@
 package com.example.mycloudapp;
 
-public class Region {
+import java.io.Serializable;
+
+public class Region implements Serializable {
     public String name;
     public double balance;
     public double capacitySize;
